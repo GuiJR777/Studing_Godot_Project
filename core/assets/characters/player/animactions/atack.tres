@@ -1,0 +1,54 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "atack"
+length = 2.412
+step = 0.036
+tracks/0/type = "value"
+tracks/0/path = NodePath("corpo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("corpo:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("corpo:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("corpo:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.036, 0.072, 0.108, 0.144, 0.18, 0.216, 0.252, 0.288, 0.324, 0.36, 0.396, 0.432, 0.468, 0.504, 0.54, 0.576, 0.612, 0.648, 0.684, 0.72, 0.756, 0.792, 0.828, 0.864, 0.9, 0.936, 0.972, 1.008, 1.044, 1.08, 1.116, 1.152, 1.188, 1.224, 1.26, 1.296, 1.332, 1.368, 1.404, 1.44, 1.476, 1.512, 1.548, 1.584, 1.62, 1.656, 1.692, 1.728, 1.764, 1.8, 1.836, 1.872, 1.908, 1.944, 1.98, 2.016, 2.052, 2.088, 2.124, 2.16, 2.196, 2.232, 2.268, 2.304, 2.34, 2.376 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 89, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 54, 54, 53, 52, 49, 48, 47, 46, 45, 44, 43, 42, 41, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91 ]
+}

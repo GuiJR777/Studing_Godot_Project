@@ -1,0 +1,77 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://core/assets/characters/player/animactions/run.tres" type="Animation" id=1]
+[ext_resource path="res://core/assets/graphics/sombra.png" type="Texture" id=2]
+[ext_resource path="res://core/scripts/player.gd" type="Script" id=3]
+[ext_resource path="res://core/assets/characters/player/animactions/idle.tres" type="Animation" id=4]
+[ext_resource path="res://core/assets/characters/player/animactions/roll.tres" type="Animation" id=5]
+[ext_resource path="res://core/assets/characters/player/animactions/aimidle.tres" type="Animation" id=6]
+[ext_resource path="res://core/assets/characters/player/animactions/aimwalk.tres" type="Animation" id=7]
+[ext_resource path="res://core/assets/characters/player/animactions/crouchwalk.tres" type="Animation" id=8]
+[ext_resource path="res://core/assets/characters/player/animactions/walk.tres" type="Animation" id=9]
+[ext_resource path="res://core/assets/characters/player/animactions/atack.tres" type="Animation" id=10]
+[ext_resource path="res://core/assets/characters/player/animactions/crouchidle.tres" type="Animation" id=11]
+[ext_resource path="res://core/assets/characters/player/animactions/deflect.tres" type="Animation" id=12]
+[ext_resource path="res://core/assets/graphics/blank.png" type="Texture" id=13]
+[ext_resource path="res://core/assets/characters/player/animactions/equip.tres" type="Animation" id=14]
+[ext_resource path="res://core/assets/characters/player/sprites/roll/east_spritesheet.png" type="Texture" id=15]
+[ext_resource path="res://core/assets/characters/player/animactions/standup.tres" type="Animation" id=16]
+[ext_resource path="res://core/assets/characters/player/animactions/crouching.tres" type="Animation" id=17]
+[ext_resource path="res://core/assets/characters/player/animactions/die.tres" type="Animation" id=18]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 27.0
+height = 28.0
+
+[node name="player" type="KinematicBody2D"]
+script = ExtResource( 3 )
+directions = [ "east_spritesheet", "southeast_spritesheet", "south_spritesheet", "southwest_spritesheet", "west_spritesheet", "northwest_spritesheet", "north_spritesheet", "northeast_spritesheet" ]
+
+[node name="colisao" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="colisao"]
+position = Vector2( -12, 4.34399e-05 )
+rotation = -1.5708
+scale = Vector2( 1, 1 )
+rotating = true
+current = true
+
+[node name="sombra" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 0.745098 )
+position = Vector2( 2, 19.5 )
+scale = Vector2( 1, 0.486667 )
+texture = ExtResource( 2 )
+
+[node name="corpo" type="Sprite" parent="."]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 15 )
+hframes = 10
+vframes = 16
+frame = 1
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/aimidle = ExtResource( 6 )
+anims/aimwalk = ExtResource( 7 )
+anims/atack = ExtResource( 10 )
+anims/crouchidle = ExtResource( 11 )
+anims/crouching = ExtResource( 17 )
+anims/crouchwalk = ExtResource( 8 )
+anims/deflect = ExtResource( 12 )
+anims/die = ExtResource( 18 )
+anims/equip = ExtResource( 14 )
+anims/idle = ExtResource( 4 )
+anims/roll = ExtResource( 5 )
+anims/run = ExtResource( 1 )
+anims/standup = ExtResource( 16 )
+anims/walk = ExtResource( 9 )
+
+[node name="selector" type="TouchScreenButton" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -34.0179, -185.838 )
+scale = Vector2( 6.98463, 21.2847 )
+normal = ExtResource( 13 )
+
+[connection signal="pressed" from="selector" to="." method="_on_selector_pressed"]
