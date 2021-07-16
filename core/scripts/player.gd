@@ -11,3 +11,7 @@ func _input(event):
 			self.die()
 		elif event.scancode == KEY_L:
 			self.ressurect()
+
+
+func _on_back_button_pressed():
+	get_tree().change_scene("res://core/scenes/scene_selection.tscn")

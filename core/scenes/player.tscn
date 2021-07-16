@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://core/assets/characters/player/animactions/run.tres" type="Animation" id=1]
 [ext_resource path="res://core/assets/graphics/sombra.png" type="Texture" id=2]
@@ -18,6 +18,11 @@
 [ext_resource path="res://core/assets/characters/player/animactions/standup.tres" type="Animation" id=16]
 [ext_resource path="res://core/assets/characters/player/animactions/crouching.tres" type="Animation" id=17]
 [ext_resource path="res://core/assets/characters/player/animactions/die.tres" type="Animation" id=18]
+[ext_resource path="res://core/assets/graphics/panel_Example4.png" type="Texture" id=19]
+[ext_resource path="res://core/assets/graphics/panel_Example1.png" type="Texture" id=20]
+[ext_resource path="res://core/assets/graphics/panel_Example2.png" type="Texture" id=21]
+[ext_resource path="res://core/assets/graphics/panel_Example3.png" type="Texture" id=22]
+[ext_resource path="res://core/assets/fonts/roboto_regular.tres" type="DynamicFont" id=23]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 27.0
@@ -35,9 +40,48 @@ shape = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="colisao"]
 position = Vector2( -12, 4.34399e-05 )
 rotation = -1.5708
-scale = Vector2( 1, 1 )
 rotating = true
 current = true
+
+[node name="Control" type="Control" parent="colisao/Camera2D"]
+margin_left = -599.399
+margin_top = 288.786
+margin_right = -559.399
+margin_bottom = 328.786
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="back_button" type="TextureButton" parent="colisao/Camera2D/Control"]
+anchor_left = 0.00165544
+anchor_right = 0.00165544
+margin_left = -0.0662174
+margin_right = 449.934
+margin_bottom = 150.0
+rect_scale = Vector2( 0.25, 0.25 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 19 )
+texture_disabled = ExtResource( 21 )
+texture_focused = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="colisao/Camera2D/Control/back_button"]
+margin_left = 118.0
+margin_top = 35.0
+margin_right = 327.0
+margin_bottom = 117.0
+custom_fonts/font = ExtResource( 23 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Voltar"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="sombra" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0.745098 )
@@ -74,4 +118,5 @@ position = Vector2( -34.0179, -185.838 )
 scale = Vector2( 6.98463, 21.2847 )
 normal = ExtResource( 13 )
 
+[connection signal="pressed" from="colisao/Camera2D/Control/back_button" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="selector" to="." method="_on_selector_pressed"]

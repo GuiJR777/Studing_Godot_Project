@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://core/scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://core/scripts/cena_01.gd" type="Script" id=1]
 [ext_resource path="res://core/assets/maps/cenario1.png" type="Texture" id=2]
 [ext_resource path="res://core/scenes/NPC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://core/scripts/cenario.gd" type="Script" id=4]
 
-[node name="Cena1" type="Node2D"]
+[node name="cena_01" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="start_position_player" type="Position2D" parent="."]

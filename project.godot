@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Studing_Godot"
-run/main_scene="res://core/scenes/Cena1.tscn"
+run/main_scene="res://core/scenes/scene_selection.tscn"
 config/icon="res://icon.png"
 
 [display]
