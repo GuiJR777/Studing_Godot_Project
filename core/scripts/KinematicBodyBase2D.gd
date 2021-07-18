@@ -12,6 +12,7 @@ export(bool) var crounched: bool = false
 export(bool) var aiming: bool = false
 export var target: Vector2 = Vector2(0,1)
 
+var bullet = preload("res://core/scenes/bullet.tscn")
 var auxiliar_count = 0
 var speed: int = 0
 var died: bool = false
@@ -131,10 +132,7 @@ func _input(event):
 			elif Input.is_action_just_pressed("ui_escape"):
 				deflect()
 			elif Input.is_action_just_pressed("ui_action"):
-				var speed_atack = 5.0
-				if aiming:
-					speed_atack = 10.0
-				play_quick("atack", speed_atack, false)			
+				action(facing)
 				
 func direction2str(direction) -> String:
 	var angle = direction.angle()
@@ -199,6 +197,20 @@ func deflect():
 	$anim.playback_speed = 1.0
 	$anim.play(state)
 	deflecting = false
+	
+func action(direction):
+	var bullet_instance = bullet.instance()
+	var spawn = bullet_instance.spawn_position[direction2str(direction)]
+	bullet_instance.position = self.global_position + spawn
+	bullet_instance.bullet_type = "red"
+	bullet_instance.set_type_bullet()
+	var speed_atack = 5.0
+	if aiming:
+		bullet_instance.look_at(target)
+		speed_atack = 10.0
+	play_quick("atack", speed_atack, false)
+	bullet_instance.apply_impulse(facing, Vector2(bullet_instance.bullet_speed, 0).rotated(facing.angle()))
+	get_tree().get_root().add_child(bullet_instance)
 	
 func play_quick(anim_state, anim_speed=1.0, backward=false):
 	var atual_state = "idle" if state == "die" else state

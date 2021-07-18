@@ -14,7 +14,7 @@
 [ext_resource path="res://core/assets/characters/player/animactions/deflect.tres" type="Animation" id=12]
 [ext_resource path="res://core/assets/graphics/blank.png" type="Texture" id=13]
 [ext_resource path="res://core/assets/characters/player/animactions/equip.tres" type="Animation" id=14]
-[ext_resource path="res://core/assets/characters/player/sprites/roll/east_spritesheet.png" type="Texture" id=15]
+[ext_resource path="res://core/assets/characters/player/sprites/atack/southeast_spritesheet.png" type="Texture" id=15]
 [ext_resource path="res://core/assets/characters/player/animactions/standup.tres" type="Animation" id=16]
 [ext_resource path="res://core/assets/characters/player/animactions/crouching.tres" type="Animation" id=17]
 [ext_resource path="res://core/assets/characters/player/animactions/die.tres" type="Animation" id=18]
@@ -28,7 +28,9 @@
 radius = 27.0
 height = 28.0
 
-[node name="player" type="KinematicBody2D"]
+[node name="player" type="KinematicBody2D" groups=[
+"player",
+]]
 script = ExtResource( 3 )
 directions = [ "east_spritesheet", "southeast_spritesheet", "south_spritesheet", "southwest_spritesheet", "west_spritesheet", "northwest_spritesheet", "north_spritesheet", "northeast_spritesheet" ]
 
@@ -94,7 +96,7 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 15 )
 hframes = 10
 vframes = 16
-frame = 1
+frame = 45
 
 [node name="anim" type="AnimationPlayer" parent="."]
 anims/aimidle = ExtResource( 6 )
@@ -117,6 +119,9 @@ self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -34.0179, -185.838 )
 scale = Vector2( 6.98463, 21.2847 )
 normal = ExtResource( 13 )
+
+[node name="alvo" type="Node2D" parent="."]
+position = Vector2( 0, -125 )
 
 [connection signal="pressed" from="colisao/Camera2D/Control/back_button" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="selector" to="." method="_on_selector_pressed"]

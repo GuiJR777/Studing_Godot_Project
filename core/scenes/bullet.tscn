@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=1]
+[ext_resource path="res://core/assets/graphics/particle.png" type="Texture" id=2]
+[ext_resource path="res://core/assets/graphics/sombra.png" type="Texture" id=3]
+[ext_resource path="res://core/scripts/bullet.gd" type="Script" id=4]
+[ext_resource path="res://core/assets/graphics/trail_1_a.png" type="Texture" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.7645
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.0214723 ), 0.0, 0.0, 0, 0, Vector2( 0.53655, 0.58589 ), 0.0, 0.0, 0, 0, Vector2( 0.969298, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="bullet" type="RigidBody2D"]
+contacts_reported = 1
+script = ExtResource( 4 )
+
+[node name="corpo" type="Sprite" parent="."]
+modulate = Color( 0.905882, 0.298039, 0.235294, 1 )
+self_modulate = Color( 0.945098, 0.580392, 0.541176, 1 )
+texture = ExtResource( 2 )
+
+[node name="colisao" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="rastro" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0 )
+width_curve = SubResource( 2 )
+default_color = Color( 0.682353, 0.839216, 0.945098, 1 )
+texture = ExtResource( 5 )
+texture_mode = 2
+script = ExtResource( 1 )
+segments = 8
+
+[node name="luz" type="Light2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+color = Color( 0.682353, 0.839216, 0.945098, 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
