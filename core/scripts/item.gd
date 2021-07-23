@@ -3,7 +3,7 @@ extends StaticBody2D
 export(bool) var is_target: bool = false
 
 func _ready():
-	add_to_group("itens")
+	add_to_group("targets")
 	
 func _process(_delta):
 	var mark = $target
@@ -19,14 +19,14 @@ func _process(_delta):
 func _on_target():
 	#get_tree().set_group("itens","is_target", false)
 	self.is_target= change_condition(is_target)
-	add_to_group("itens")
+	add_to_group("targets")
 	
 
 func change_condition(condition) -> bool:
 	if condition:
 		return false
 	else:
-		var itens = get_tree().get_nodes_in_group("itens")
+		var itens = get_tree().get_nodes_in_group("targets")
 		for item in itens:
 			item.is_target = false
 		return true

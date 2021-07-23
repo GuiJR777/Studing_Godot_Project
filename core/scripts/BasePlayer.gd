@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-class_name KinematicBodyBase2D
+class_name BasePlayer
 
 export(int) var walk_speed: int = 300
 export(int) var run_speed: int = 300
@@ -10,8 +10,10 @@ export var facing: Vector2 = Vector2(0,1)
 export(bool) var controlled: bool = false
 export(bool) var crounched: bool = false
 export(bool) var aiming: bool = false
-export var target: Vector2 = Vector2(0,1)
+export(bool) var is_target: bool = false
+export(String) var last_magic = "hit"
 
+var target
 var bullet = preload("res://core/scenes/bullet.tscn")
 var auxiliar_count = 0
 var speed: int = 0
@@ -78,6 +80,7 @@ func _move(delta) -> void:
 			auxiliar_count += delta
 			if auxiliar_count >= max_count:
 				roll = false
+				$area_contato.get_children()[0].disabled = false
 				auxiliar_count = 0
 				$anim.playback_speed = 1.0
 		elif Input.is_action_pressed("ui_run"):
@@ -92,7 +95,7 @@ func _move(delta) -> void:
 		facing = dir
 		
 	if aiming:
-		facing = self.target - self.global_position
+		facing = self.target.global_position - self.global_position
 		
 	var animation = direction2str(facing)
 	var newTexture = _getTexture(animation, state)
@@ -171,18 +174,20 @@ func _getTexture(_animation, _state) -> String:
 func deflect():
 	var atual_state = state
 	deflecting = true
+	$area_contato.get_children()[0].disabled = true
 	if atual_state == "run":
 		state = "roll"
+		$anim.playback_speed = 2.0
 	else:
 		$colisao.disabled = true
 		state = "deflect"
+		$anim.playback_speed = 3.0
 	var _animation = direction2str(facing)
 	var newTexture = _getTexture(_animation, state)
 	var key = str(state, "_", _animation)
 	if oldTexture != newTexture:
 		oldTexture = newTexture
 		$corpo.texture = _imageCache(newTexture, key)
-	$anim.playback_speed = 2.0
 	$anim.play(state)
 	if atual_state == "run":
 		roll = true
@@ -192,6 +197,7 @@ func deflect():
 		yield($anim, "animation_finished")
 	deflecting = false
 	$colisao.disabled = false
+	$area_contato.get_children()[0].disabled = false
 	state = atual_state
 	_animation = direction2str(facing)
 	$anim.playback_speed = 1.0
@@ -202,14 +208,19 @@ func action(direction):
 	var bullet_instance = bullet.instance()
 	var spawn = bullet_instance.spawn_position[direction2str(direction)]
 	bullet_instance.position = self.global_position + spawn
-	bullet_instance.bullet_type = "red"
+	bullet_instance.bullet_color = select_rand_item(["blue", "red", "yellow", "green", "orange", "purple", "white", "black", "evil", "good"])
+	bullet_instance.bullet_type = last_magic
+	bullet_instance.origin_position = global_position
 	bullet_instance.set_type_bullet()
 	var speed_atack = 5.0
 	if aiming:
-		bullet_instance.look_at(target)
+		var target_position = target.get_node('area_contato').get_node('colisao').global_position
+		bullet_instance.look_at(target_position)
 		speed_atack = 10.0
+		bullet_instance.apply_impulse(facing, Vector2(bullet_instance.bullet_speed, 0).rotated((target_position - bullet_instance.global_position).angle()))
+	else:
+		bullet_instance.apply_impulse(facing, Vector2(bullet_instance.bullet_speed, 0).rotated(facing.angle()))
 	play_quick("atack", speed_atack, false)
-	bullet_instance.apply_impulse(facing, Vector2(bullet_instance.bullet_speed, 0).rotated(facing.angle()))
 	get_tree().get_root().add_child(bullet_instance)
 	
 func play_quick(anim_state, anim_speed=1.0, backward=false):

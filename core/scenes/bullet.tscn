@@ -7,7 +7,7 @@
 [ext_resource path="res://core/assets/graphics/trail_1_a.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 6.7645
+radius = 7.27861
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0.0214723 ), 0.0, 0.0, 0, 0, Vector2( 0.53655, 0.58589 ), 0.0, 0.0, 0, 0, Vector2( 0.969298, 1 ), 0.0, 0.0, 0, 0 ]
@@ -16,13 +16,22 @@ _data = [ Vector2( 0, 0.0214723 ), 0.0, 0.0, 0, 0, Vector2( 0.53655, 0.58589 ), 
 contacts_reported = 1
 script = ExtResource( 4 )
 
-[node name="corpo" type="Sprite" parent="."]
-modulate = Color( 0.905882, 0.298039, 0.235294, 1 )
-self_modulate = Color( 0.945098, 0.580392, 0.541176, 1 )
-texture = ExtResource( 2 )
+[node name="visibilidade" type="VisibilityNotifier2D" parent="."]
 
 [node name="colisao" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+disabled = true
+
+[node name="areadecontato" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 31
+
+[node name="colisao" type="CollisionShape2D" parent="areadecontato"]
+shape = SubResource( 1 )
+
+[node name="luz" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+color = Color( 0.682353, 0.839216, 0.945098, 1 )
 
 [node name="rastro" type="Line2D" parent="."]
 points = PoolVector2Array( 0, 0 )
@@ -31,11 +40,13 @@ default_color = Color( 0.682353, 0.839216, 0.945098, 1 )
 texture = ExtResource( 5 )
 texture_mode = 2
 script = ExtResource( 1 )
-segments = 8
+segments = 12
 
-[node name="luz" type="Light2D" parent="."]
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-color = Color( 0.682353, 0.839216, 0.945098, 1 )
+[node name="corpo" type="Sprite" parent="."]
+modulate = Color( 0.905882, 0.298039, 0.235294, 1 )
+self_modulate = Color( 0.945098, 0.580392, 0.541176, 1 )
+texture = ExtResource( 2 )
 
 [connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
+[connection signal="screen_exited" from="visibilidade" to="." method="_on_visibilidade_screen_exited"]
+[connection signal="area_entered" from="areadecontato" to="." method="_on_areadecontato_area_entered"]

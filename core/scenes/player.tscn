@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://core/assets/characters/player/animactions/run.tres" type="Animation" id=1]
 [ext_resource path="res://core/assets/graphics/sombra.png" type="Texture" id=2]
@@ -14,7 +14,7 @@
 [ext_resource path="res://core/assets/characters/player/animactions/deflect.tres" type="Animation" id=12]
 [ext_resource path="res://core/assets/graphics/blank.png" type="Texture" id=13]
 [ext_resource path="res://core/assets/characters/player/animactions/equip.tres" type="Animation" id=14]
-[ext_resource path="res://core/assets/characters/player/sprites/atack/southeast_spritesheet.png" type="Texture" id=15]
+[ext_resource path="res://core/assets/characters/player/sprites/atack/northeast_spritesheet.png" type="Texture" id=15]
 [ext_resource path="res://core/assets/characters/player/animactions/standup.tres" type="Animation" id=16]
 [ext_resource path="res://core/assets/characters/player/animactions/crouching.tres" type="Animation" id=17]
 [ext_resource path="res://core/assets/characters/player/animactions/die.tres" type="Animation" id=18]
@@ -25,8 +25,12 @@
 [ext_resource path="res://core/assets/fonts/roboto_regular.tres" type="DynamicFont" id=23]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 27.0
-height = 28.0
+radius = 15.2408
+height = 22.4913
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 26.0249
+height = 64.947
 
 [node name="player" type="KinematicBody2D" groups=[
 "player",
@@ -45,23 +49,23 @@ rotation = -1.5708
 rotating = true
 current = true
 
-[node name="Control" type="Control" parent="colisao/Camera2D"]
-margin_left = -599.399
-margin_top = 288.786
-margin_right = -559.399
-margin_bottom = 328.786
+[node name="controle" type="Control" parent="colisao/Camera2D"]
+margin_left = -587.522
+margin_top = 255.987
+margin_right = -547.522
+margin_bottom = 295.987
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="back_button" type="TextureButton" parent="colisao/Camera2D/Control"]
+[node name="back_button" type="TextureButton" parent="colisao/Camera2D/controle"]
 anchor_left = 0.00165544
 anchor_right = 0.00165544
 margin_left = -0.0662174
 margin_right = 449.934
 margin_bottom = 150.0
-rect_scale = Vector2( 0.25, 0.25 )
+rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 20 )
 texture_pressed = ExtResource( 22 )
 texture_hover = ExtResource( 19 )
@@ -71,7 +75,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="colisao/Camera2D/Control/back_button"]
+[node name="Label" type="Label" parent="colisao/Camera2D/controle/back_button"]
 margin_left = 118.0
 margin_top = 35.0
 margin_right = 327.0
@@ -85,18 +89,144 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="hit" type="TextureButton" parent="colisao/Camera2D/controle"]
+anchor_left = 0.00165544
+anchor_right = 0.00165544
+margin_left = 232.196
+margin_right = 682.196
+margin_bottom = 150.0
+rect_scale = Vector2( 0.2, 0.5 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 19 )
+texture_disabled = ExtResource( 21 )
+texture_focused = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="colisao/Camera2D/controle/hit"]
+margin_left = -42.3032
+margin_top = 34.991
+margin_right = 233.697
+margin_bottom = 116.991
+rect_scale = Vector2( 2, 1 )
+custom_fonts/font = ExtResource( 23 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "H"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="puxar" type="TextureButton" parent="colisao/Camera2D/controle"]
+anchor_left = 0.00165544
+anchor_right = 0.00165544
+margin_left = 341.653
+margin_top = -1.33484
+margin_right = 791.653
+margin_bottom = 148.665
+rect_scale = Vector2( 0.2, 0.5 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 19 )
+texture_disabled = ExtResource( 21 )
+texture_focused = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="colisao/Camera2D/controle/puxar"]
+margin_left = -42.3032
+margin_top = 34.991
+margin_right = 233.697
+margin_bottom = 116.991
+rect_scale = Vector2( 2, 1 )
+custom_fonts/font = ExtResource( 23 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "P"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="empurrar" type="TextureButton" parent="colisao/Camera2D/controle"]
+anchor_left = 0.00165544
+anchor_right = 0.00165544
+margin_left = 451.11
+margin_top = -1.33484
+margin_right = 901.11
+margin_bottom = 148.665
+rect_scale = Vector2( 0.2, 0.5 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 19 )
+texture_disabled = ExtResource( 21 )
+texture_focused = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="colisao/Camera2D/controle/empurrar"]
+margin_left = -42.3032
+margin_top = 34.991
+margin_right = 233.697
+margin_bottom = 116.991
+rect_scale = Vector2( 2, 1 )
+custom_fonts/font = ExtResource( 23 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "E"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="levitar" type="TextureButton" parent="colisao/Camera2D/controle"]
+anchor_left = 0.00165544
+anchor_right = 0.00165544
+margin_left = 556.562
+margin_top = -1.33484
+margin_right = 1006.56
+margin_bottom = 148.665
+rect_scale = Vector2( 0.2, 0.5 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 19 )
+texture_disabled = ExtResource( 21 )
+texture_focused = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="colisao/Camera2D/controle/levitar"]
+margin_left = -42.3032
+margin_top = 34.991
+margin_right = 233.697
+margin_bottom = 116.991
+rect_scale = Vector2( 2, 1 )
+custom_fonts/font = ExtResource( 23 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "L"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="sombra" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0.745098 )
-position = Vector2( 2, 19.5 )
-scale = Vector2( 1, 0.486667 )
+position = Vector2( 0, 8.791 )
+scale = Vector2( 0.8, 0.4 )
 texture = ExtResource( 2 )
 
 [node name="corpo" type="Sprite" parent="."]
-scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 15 )
 hframes = 10
 vframes = 16
-frame = 45
+frame = 48
 
 [node name="anim" type="AnimationPlayer" parent="."]
 anims/aimidle = ExtResource( 6 )
@@ -116,12 +246,20 @@ anims/walk = ExtResource( 9 )
 
 [node name="selector" type="TouchScreenButton" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-position = Vector2( -34.0179, -185.838 )
-scale = Vector2( 6.98463, 21.2847 )
+position = Vector2( -30.2381, -120.952 )
+scale = Vector2( 5.97669, 14.7961 )
 normal = ExtResource( 13 )
 
-[node name="alvo" type="Node2D" parent="."]
-position = Vector2( 0, -125 )
+[node name="area_contato" type="Area2D" parent="."]
+collision_mask = 8
 
-[connection signal="pressed" from="colisao/Camera2D/Control/back_button" to="." method="_on_back_button_pressed"]
+[node name="colisao" type="CollisionShape2D" parent="area_contato"]
+position = Vector2( 0, -59 )
+shape = SubResource( 2 )
+
+[connection signal="pressed" from="colisao/Camera2D/controle/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="colisao/Camera2D/controle/hit" to="." method="_on_hit_pressed"]
+[connection signal="pressed" from="colisao/Camera2D/controle/puxar" to="." method="_on_puxar_pressed"]
+[connection signal="pressed" from="colisao/Camera2D/controle/empurrar" to="." method="_on_empurrar_pressed"]
+[connection signal="pressed" from="colisao/Camera2D/controle/levitar" to="." method="_on_levitar_pressed"]
 [connection signal="pressed" from="selector" to="." method="_on_selector_pressed"]

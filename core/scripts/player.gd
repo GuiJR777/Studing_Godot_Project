@@ -1,4 +1,4 @@
-extends KinematicBodyBase2D
+extends BasePlayer
 
 func _on_selector_pressed():
 	get_tree().set_group("characters", "controlled", false)
@@ -15,3 +15,15 @@ func _input(event):
 
 func _on_back_button_pressed():
 	get_tree().change_scene("res://core/scenes/scene_selection.tscn")
+
+func _on_hit_pressed():
+	last_magic = "hit"
+
+func _on_puxar_pressed():
+	last_magic = "puxar"
+
+func _on_empurrar_pressed():
+	last_magic = "empurrar"
+
+func _on_levitar_pressed():
+	last_magic = "levitar"
